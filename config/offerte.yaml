@@ -1,0 +1,10 @@
+# Definizione delle regole per la generazione di offerte mirate
+regole:
+  - tipo: sconto_percentuale
+    target: "bundle_compostabili"
+    sconto: 0.10
+    durata_giorni: 45
+  - tipo: prezzo_lancio
+    target: "nuovi_articoli"
+    markup_min: 0.25
+    durata_giorni: 30
