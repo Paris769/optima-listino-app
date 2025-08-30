@@ -2,7 +2,5 @@
 pandas==2.2.2
 openpyxl==3.1.5
 rapidfuzz==3.9.6
-pdfplumber==0.11.4
 PyYAML==6.0.2
-streamlit>=1.36
-pdfminer.six==20231228
+streamlit==1.36.0
