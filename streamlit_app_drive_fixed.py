@@ -15,10 +15,13 @@ from adapters.fornitore_essebidue import FornitoreEssebiDueAdapter
 from adapters.pdf_generic_adapter import PDFGenericAdapter
 from adapters.fornitore_xyz import FornitoreXYZAdapter
 
+# Set page configuration for Streamlit
+st.set_page_config(page_title="Optima – Aggiornamento Listino", layout="wide")
+
 
 """
 Streamlit application for updating the corporate price list and generating
-customer‑specific offers. This version supports loading the master listino
+ 
 directly from Google Drive when no file is uploaded by the user. A service
 account credential and a default file ID must be stored in st.secrets under
 the key `gdrive` (see README for details).
@@ -115,7 +118,7 @@ def save_excel_download(df: pd.DataFrame, filename: str) -> bytes:
 
 
 # Streamlit UI setup
-st.set_page_config(page_title="Optima – Aggiornamento Listino", layout="wide")
+
 st.title("🗖 Optima – Aggiornamento Listino & Offerte")
 
 with st.sidebar:
