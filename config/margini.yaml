@@ -1,0 +1,5 @@
+# Definizione dei margini minimi per diverse categorie o livelli
+livelli:
+  Base: 0.35
+  A: 0.45
+  B: 0.30
