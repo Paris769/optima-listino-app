@@ -14,6 +14,8 @@ from adapters.base_adapter import BaseAdapter
 from adapters.fornitore_essebidue import FornitoreEssebiDueAdapter
 from adapters.pdf_generic_adapter import PDFGenericAdapter
 from adapters.fornitore_xyz import FornitoreXYZAdapter
+# Page configuration must be set before any other Streamlit command
+st.set_page_config(page_title="Optima – Aggiornamento Listino", layout="wide")
 
 
 '''
