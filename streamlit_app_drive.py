@@ -115,10 +115,10 @@ def save_excel_download(df: pd.DataFrame, filename: str) -> bytes:
 
 
 # Streamlit UI setup
-st.set_page_config(page_title="Optima – Aggiornamento Listino", layout="wide")
+#st .set_page_config(page_title="Optima – Aggiornamento Listino", layout="wide")
 st.title("🧾 Optima – Aggiornamento Listino & Offerte")
 
-with st.sidebar:
+wi# th st.sidebar:
     st.header("Origine dati")
     adapter_name = st.selectbox(
         "Adapter listino fornitore",
