@@ -1,0 +1,6 @@
+# Requirements for the Optima Listino App
+pandas==2.2.2
+openpyxl==3.1.5
+rapidfuzz==3.9.6
+pdfplumber==0.11.4
+PyYAML==6.0.2
