@@ -110,10 +110,9 @@ def download_drive_file(file_id: str, suffix: str = ".xlsx") -> str:
        response.raise_for_status()
        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
        tmp.write(response.content)
-       tmp.fflush()
+  tmp.flush()
        return tmp.name
-
-def to_tempfile(uploaded_file: any, suffix: str) -> str:
+def (uploaded_file: any, suffix: str) -> str:
     """Save an UploadedFile from Streamlit to a temporary file and return its path."""
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     tmp.write(uploaded_file.read())
