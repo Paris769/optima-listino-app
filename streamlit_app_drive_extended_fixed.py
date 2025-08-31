@@ -6,10 +6,12 @@ from typing import Dict, List, Tuple, Optional
 
 import pandas as pd
 import streamlit as st
+import requests
 
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaIoBaseDownload
+
+#from google.oauth2 import service_account
+#from googleapiclient.discovery import build
+#from googleapiclient.http import MediaIoBaseDownload
 
 from listino_app import ListinoUpdater
 from adapters.base_adapter import BaseAdapter
@@ -84,6 +86,7 @@ def _get_drive_service() -> any:
     )
     return build("drive", "v3", credentials=creds)
 
+   
 
 def download_drive_file(file_id: str, suffix: str = ".xlsx") -> str:
     """Download a file from Google Drive and write it to a temporary file.
@@ -100,18 +103,15 @@ def download_drive_file(file_id: str, suffix: str = ".xlsx") -> str:
     str
         The path to the downloaded temporary file on the local filesystem.
     """
-    service = _get_drive_service()
-    request = service.files().get_media(fileId=file_id)
-    fh = io.BytesIO()
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while not done:
-        _, done = downloader.next_chunk()
-    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
-    tmp.write(fh.getvalue())
-    tmp.flush()
-    return tmp.name
-
+    
+      # Download file using simple HTTP via requests
+       url = f"https://drive.google.com/uc?export=download&id={file_id}"
+       response = requests.get(url)
+       response.raise_for_status()
+       tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+       tmp.write(response.content)
+       tmp.fflush()
+       return tmp.name
 
 def to_tempfile(uploaded_file: any, suffix: str) -> str:
     """Save an UploadedFile from Streamlit to a temporary file and return its path."""
