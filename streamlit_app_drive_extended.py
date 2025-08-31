@@ -5,11 +5,10 @@ import tempfile
 from typing import Dict, List, Tuple, Optional
 
 import pandas as pd
+import requests
 import streamlit as st
 
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaIoBaseDownload
+
 
 from listino_app import ListinoUpdater
 from adapters.base_adapter import BaseAdapter
@@ -94,17 +93,14 @@ def download_drive_file(file_id: str, suffix: str = ".xlsx") -> str:
     str
         The path to the downloaded temporary file on the local filesystem.
     """
-    service = _get_drive_service()
-    request = service.files().get_media(fileId=file_id)
-    fh = io.BytesIO()
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while not done:
-        _, done = downloader.next_chunk()
+      url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    response = requests.get(url)
+    response.raise_for_status()
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
-    tmp.write(fh.getvalue())
+    tmp.write(response.content)
     tmp.flush()
     return tmp.name
+
 
 
 def to_tempfile(uploaded_file: any, suffix: str) -> str:
