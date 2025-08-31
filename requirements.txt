@@ -6,7 +6,5 @@ rapidfuzz==3.9.6
 PyYAML==6.0.2
 streamlit==1.36.0
 pypdf>=3.13.0
-# Rimosso pdfplumber e pdfminer.six perché non supportati su Python 3.13
-google-api-python-client==2.137.0
-google-auth==2.33.0
-google-auth-httplib2==0.2.0
+# Rimosso pdfplumber, pdfminer.six e librerie Google perché non supportati su Python 3.13
+requests==2.31.0
