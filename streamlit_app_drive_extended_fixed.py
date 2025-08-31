@@ -102,17 +102,17 @@ def download_drive_file(file_id: str, suffix: str = ".xlsx") -> str:
     -------
     str
         The path to the downloaded temporary file on the local filesystem.
-    """
-    
-      # Download file using simple HTTP via requests
-       url = f"https://drive.google.com/uc?export=download&id={file_id}"
-       response = requests.get(url)
-       response.raise_for_status()
-       tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
-       tmp.write(response.content)
-  tmp.flush()
-       return tmp.name
-def (uploaded_file: any, suffix: str) -> str:
+  
+             # Download file using simple HTTP via requests
+        url = f"https://drive.google.com/uc?export=download&id={file_id}"
+        response = requests.get(url)
+            response.raise_for_status()
+        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+        tmp.write(response.content)
+        tmp.flush()
+    return tmp.name
+
+     uploaded_file: any, suffix: str) -> str:
     """Save an UploadedFile from Streamlit to a temporary file and return its path."""
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     tmp.write(uploaded_file.read())
