@@ -89,8 +89,16 @@ def _read_any_table(uploaded_file, sheet: Optional[str | int], header_row_idx: O
 def _make_header_selection(df_raw: pd.DataFrame, key_prefix: str) -> int:
     st.caption("Scegli la **riga di intestazione** (0-based nel preview) — le righe sopra verranno scartate")
     st.dataframe(df_raw.head(HEADER_MAX_PEEK))
-    header_idx = st.number_input("Riga intestazione", min_value=0, max_value=max(0, len(df_raw) - 1),
-                                 value=0, step=1, key=f"{key_prefix}_hdr")
+    # Use a unique key for each header selector to avoid DuplicateWidgetID errors when multiple
+    # number_input widgets are rendered (e.g., for both internal and supplier previews).
+    header_idx = st.number_input(
+        "Riga intestazione",
+        min_value=0,
+        max_value=max(0, len(df_raw) - 1),
+        value=0,
+        step=1,
+        key=f"{key_prefix}_hdr_idx",
+    )
     return int(header_idx)
 
 
